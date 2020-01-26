@@ -214,7 +214,7 @@ def download(dl_url):
     status = response.status_code
     #HTTP 200 means OK
     if (status != 200):
-        print("Error code: " + status)
+        print("Error code: " + str(status))
         sys.exit(1)
     elif (response == ""):
         print("Response error")
