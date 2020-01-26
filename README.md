@@ -28,7 +28,7 @@ asio.dl_write_utf8("https://github.com/0x416c616e?tab=repositories", "first_repo
 How to download a file and return the HTTP response to the function invoker:
 
 ```
-respose = asio.download("example.com")
+response = asio.download("example.com")
 ```
 
 The download() does not save to a file. It merely sends an HTTP requests, then returns the HTTP response as a variable. So the downloaded file/request is only in RAM.
