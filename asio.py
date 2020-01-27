@@ -55,7 +55,7 @@ def clear_file(filename):
 #exampe usage: confirm("example.txt", "delete")
 def confirm(operation, filename):
     question = "Are you sure you want to "
-    question += + operation + " " + filename + "? y/n: "
+    question += operation + " " + filename + "? y/n: "
     choice = input(question)
     if ((choice.lower() == "n") or (choice.lower() == "no")):
         #user does not want to proceed with IO operation
@@ -81,6 +81,28 @@ def delete_directory(folder):
     except IOError as e:
         ex_msg(folder, e, "delete_directory", "deleting")
 
+#when delete_directory() doesn't work, try this force_delete instead
+#but be very careful when using it!
+def force_delete_directory(folder):
+    try:
+        #exit the program if this function is used in an unsafe way
+        if ((folder == "/") or ("no-preserve-root" in folder)):
+            print("Error: dangerous usage of force_delete_directory()!")
+            print("Argument provided: " + str(folder))
+            print("Exiting")
+            sys.exit(1)
+        #proceed with deletion
+        cli_str = "rm -rf " + str(folder)
+        os.system(cli_str)
+    except IOError as e:
+        ex_msg(folder, e, "force_delete_directory", "force-deleting")
+
+#make a new directory
+def make_directory(folder):
+    try:
+        os.mkdir(folder)
+    except IOError as e:
+        ex_msg(folder, e, "make_directory", "creating directory")
 
 #=====Existence functions=====
 #check if file exists
